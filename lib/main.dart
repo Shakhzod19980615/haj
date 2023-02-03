@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Haj va Umra',
+      color: Colors.transparent,
       debugShowCheckedModeBanner: false,
       home: HomePage(),
     );
