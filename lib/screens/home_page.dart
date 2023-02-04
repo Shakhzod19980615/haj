@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        margin: EdgeInsets.only(top: 90,left: 85,right: 85,bottom: 100),
+        margin: EdgeInsets.only(top: 90,left: 85,right: 85,bottom: 60),
         child: Column(
           children: [
             GestureDetector(
