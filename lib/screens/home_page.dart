@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:haj/screens/main_menu_page.dart';
+import 'package:haj/screens/main/main_menu_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        margin: EdgeInsets.only(top: 90,left: 85,right: 85,bottom: 60),
+        margin: EdgeInsets.only(top: 60,left: 85,right: 85,),
         child: Column(
           children: [
             GestureDetector(
@@ -48,13 +48,13 @@ class _HomePageState extends State<HomePage> {
                 );
               },
               child: Container(
-                margin: EdgeInsets.only(top:40),
+                margin: EdgeInsets.only(top:20),
                 child: SvgPicture.asset("assets/images/umra.svg",width: 200,height: 200,),
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 50,vertical: 5),
-              margin: EdgeInsets.only(top: 50),
+              padding: EdgeInsets.symmetric(horizontal: 30,vertical: 5),
+              margin: EdgeInsets.only(top: 30),
               decoration: BoxDecoration(
                 color: Color(0xFFD6F0E3),
                 borderRadius: BorderRadius.circular(20)
