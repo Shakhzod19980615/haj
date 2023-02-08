@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:haj/model/demo_model.dart';
+import 'package:haj/screens/context_page.dart';
 import 'package:haj/screens/main/widgets/arrow_line.dart';
 import 'package:haj/screens/main/widgets/dot_line.dart';
 import 'package:haj/screens/main/widgets/submain_list_item.dart';
@@ -48,35 +49,45 @@ class MainListItem extends StatelessWidget {
                     margin: EdgeInsets.only(left: 15),
                 ),
                 ArrowLine(),
-                Container(
-                  width: MediaQuery.of(context).size.width*0.8,
-                  margin:EdgeInsets.only(top: 10,left: 0),
-                  decoration:BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(18)),
-                    color: Color(0xFFD6F0E3),
-                  ),
+                GestureDetector(
+                  onTap:(){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ContextPage(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width*0.8,
+                    margin:EdgeInsets.only(top: 10,left: 0),
+                    decoration:BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(18)),
+                      color: Color(0xFFD6F0E3),
+                    ),
 
-                  child: Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: Row(
-                      children: [
-                        Align(
-                          alignment:Alignment.topLeft,
-                          child: Container(
-                             padding:EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(18)),
-                                color: Color(0xFF429E73)
-                              ),
-                              child: Text(model.subList?[index].subTitle??"",
-                              style: TextStyle(color: Colors.white,fontSize: 16,
-                              fontWeight: FontWeight.w400),)),
-                        ),
-                        Spacer(),
-                        Container(
+                    child: Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: Row(
+                        children: [
+                          Align(
+                            alignment:Alignment.topLeft,
+                            child: Container(
+                               padding:EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(Radius.circular(18)),
+                                  color: Color(0xFF429E73)
+                                ),
+                                child: Text(model.subList?[index].subTitle??"",
+                                style: TextStyle(color: Colors.white,fontSize: 16,
+                                fontWeight: FontWeight.w400),)),
+                          ),
+                          Spacer(),
+                          Container(
 
-                            child: SvgPicture.asset("assets/images/umra.svg",width: 100,height: 90,))
-                      ],
+                              child: SvgPicture.asset("assets/images/umra.svg",width: 100,height: 90,))
+                        ],
+                      ),
                     ),
                   ),
                 ),
