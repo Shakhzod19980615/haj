@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:haj/model/demo_model.dart';
-import 'package:haj/screens/context_page.dart';
+import 'package:haj/screens/context/context_page.dart';
 import 'package:haj/screens/main/widgets/arrow_line.dart';
 import 'package:haj/screens/main/widgets/dot_line.dart';
 import 'package:haj/screens/main/widgets/submain_list_item.dart';

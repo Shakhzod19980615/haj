@@ -197,9 +197,10 @@ class _MainMenuPageState extends State<MainMenuPage> {
             Expanded(
               child: Container(
                 // height: MediaQuery.of(context).size.height - 90,
-                padding: const EdgeInsets.only(bottom: 0),
+                clipBehavior: Clip.antiAlias,
                 decoration: const BoxDecoration(
                     color: Colors.white,
+
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(32),
                         topRight: Radius.circular(32))),

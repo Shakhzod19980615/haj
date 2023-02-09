@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:haj/screens/context/widget/zikr_list_item.dart';
+
+import '../../model/demo_model.dart';
+import '../main/widgets/main_list_item.dart';
 
 class ContextPage extends StatefulWidget {
   const ContextPage({Key? key}) : super(key: key);
@@ -191,13 +195,24 @@ class _ContextPageState extends State<ContextPage> {
             ),
             Expanded(
                 child: Container(
-                  padding: const EdgeInsets.only(bottom: 0),
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  clipBehavior: Clip.antiAlias,
                   decoration: const BoxDecoration(
-                      color: Colors.white,
+                      color: Color(0xFFD6F0E3),
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(32),
                           topRight: Radius.circular(32))),
-            ))
+
+                  child:ListView.builder(
+                    padding: EdgeInsets.only(top: 30),
+                    itemCount: 1,
+                    itemBuilder: (context,index){
+                      return ZikrListItem();
+                }
+                ),
+              )
+            )
           ],
         ),
       ),
