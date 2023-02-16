@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:haj/extentions/extention.dart';
 import 'package:haj/model/demo_model.dart';
 import 'package:haj/screens/context/context_page.dart';
 import 'package:haj/screens/main/widgets/arrow_line.dart';
 import 'package:haj/screens/main/widgets/dot_line.dart';
 import 'package:haj/screens/main/widgets/submain_list_item.dart';
+
+import '../../../theme/theming_cubit.dart';
 
 class MainListItem extends StatelessWidget {
   const MainListItem({Key? key,required this.model,required this.isTopItem}) : super(key: key);
@@ -12,6 +16,7 @@ class MainListItem extends StatelessWidget {
   final bool isTopItem;
   @override
   Widget build(BuildContext context) {
+    ThemingCubit theme = BlocProvider.of<ThemingCubit>(context, listen: false);
     return Column(
       children: [
 
@@ -27,7 +32,7 @@ class MainListItem extends StatelessWidget {
                 DotLine(padding: EdgeInsets.only(top: 10,),isTop: isTopItem,),
                 Container(
                   margin: EdgeInsets.only(left: 20,top: 10),
-                  child: Text(model.title??"",
+                  child: Text("${model.title??""}".toLatin(theme.isLatin),
                     style: TextStyle(
                         color: Color(0xFF2C6E4F),
                         fontSize:20, fontWeight: FontWeight.w800 ),),
@@ -78,7 +83,7 @@ class MainListItem extends StatelessWidget {
                                   borderRadius: BorderRadius.all(Radius.circular(18)),
                                   color: Color(0xFF429E73)
                                 ),
-                                child: Text(model.subList?[index].subTitle??"",
+                                child: Text("${model.subList?[index].subTitle??""}".toLatin(theme.isLatin),
                                 style: TextStyle(color: Colors.white,fontSize: 16,
                                 fontWeight: FontWeight.w400),)),
                           ),

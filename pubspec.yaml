@@ -30,12 +30,19 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  sqflite_sqlcipher: ^2.1.0
+#  sqflite_sqlcipher: ^2.1.0
   path_provider: ^2.0.9
   sqflite: ^2.0.2
   shared_preferences: ^2.0.15
   flutter_svg: any
   dotted_line: ^3.1.0
+  flutter_bloc: ^8.0.1
+  provider: ^6.0.3
+  translit: ^2.0.0
+  translate:
+    git:
+      url: https://gitlab+deploy-token-1562522:XtiLAt8YeGpqN7aba353@gitlab.com/hilolnashr/translate.git
+      ref: b10324e2f26464915d8f05977e8ac14f0b912dfc
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

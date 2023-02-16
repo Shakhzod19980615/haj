@@ -50,11 +50,11 @@ SubList copyWith({  String? subTitle,
 }
 
 var demoList = [
-  DemoModel(title: "Umra ahkomlari",subList: [SubList(subTitle: "Safar oldi")]),
-  DemoModel(title: "Ehrom",subList: [
-    SubList(subTitle: "Ehrom bog'lash"),
-    SubList(subTitle: "Nafl namoz"),
-    SubList(subTitle: "Umra niyati")
+  DemoModel(title: "Умра ахкомлари",subList: [SubList(subTitle: "Сафар олди")]),
+  DemoModel(title: "Ехром",subList: [
+    SubList(subTitle: "Ехром боғлаш"),
+    SubList(subTitle: "Нафл намоз"),
+    SubList(subTitle: "Умра нияти")
 
   ])
 ];

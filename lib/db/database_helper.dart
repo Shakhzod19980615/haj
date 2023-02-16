@@ -31,7 +31,7 @@ class DatabaseHelper {
 // Copy from asset
     ByteData data = await rootBundle.load(join("assets", "haj_umra.db"));
     List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
-    await new File(path).writeAsBytes(bytes, flush: true);
+    await File(path).writeAsBytes(bytes, flush: true);
 
 
     return await openDatabase(path, version: 1,onCreate: _onCreate);
