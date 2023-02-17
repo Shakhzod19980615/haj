@@ -26,8 +26,8 @@ class ThemingCubit extends Cubit<ThemingState> {
     _prefs?.commit();
   }
 
-  void changeLanguage() {
-    _isLatin = !_isLatin;
+  void changeLanguage(bool isLatin) {
+    _isLatin = isLatin;
     saveLang();
     emit(LanguageChanged());
   }
@@ -36,7 +36,7 @@ class ThemingCubit extends Cubit<ThemingState> {
 
   void init()async{
      _prefs ??= await SharedPreferences.getInstance();
-    _isDark = _prefs?.getBool("theme")??false;
+    _isDark = _prefs?.getBool("_isDark")??false;
     emit(ThemingChanged());
   }
   void saveTheme()async{
@@ -44,8 +44,9 @@ class ThemingCubit extends Cubit<ThemingState> {
     _prefs?.setBool("theme", isDark);
     _prefs?.commit();
   }
-  void changeTheme() {
-    _isDark = !_isDark;
+  void changeTheme(bool value) {
+    _isDark = value;
+    _prefs?.setBool("_isDark", isDark);
     saveTheme();
     emit(ThemingChanged());
   }

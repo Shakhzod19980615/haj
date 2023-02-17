@@ -27,7 +27,6 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
   @override
   Widget build(BuildContext context) {
     ThemingCubit theme = BlocProvider.of<ThemingCubit>(context, listen: false);
-    return Consumer<SettingsProvider>(builder: (context, provider, child) {
       return Scaffold(
       backgroundColor:Colors.white,
       body: Center(
@@ -41,9 +40,8 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                   SvgPicture.asset("assets/images/lang_image.svg"),
                   GestureDetector(
                       onTap: (){
-                        setState(() {
-                          provider.changeLanguageToTrue();
-                        });
+                        theme.changeLanguage(true);
+                        setState(() {});
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -64,9 +62,8 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                     ),
                   GestureDetector(
                     onTap: (){
-                      setState(() {
-                        provider.changeLanguageToFalse();
-                      });
+                      theme.changeLanguage(false);
+                      setState(() {});
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -91,6 +88,5 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
             ),
       ),
     );
-  });
   }
 }

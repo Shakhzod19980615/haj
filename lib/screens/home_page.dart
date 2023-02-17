@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:haj/colors/colors.dart';
 import 'package:haj/extentions/extention.dart';
 import 'package:haj/screens/main/main_menu_page.dart';
 
@@ -25,7 +26,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     ThemingCubit theme = BlocProvider.of<ThemingCubit>(context, listen: false);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: theme.isDark? darkColorBk : white,
       body: Center(
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -51,10 +52,10 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Container(
                         margin: EdgeInsets.only(top: 5),
-                        child: Text("ХАЖ".toLatin(theme.isLatin),
+                        child: Text("HАЖ".toLatin(theme.isLatin),
                           style: TextStyle(
                               fontSize: 25,
-                              color: Color(0xFF2C6E4F),
+                              color: theme.isDark?  white :Color(0xFF2C6E4F),
                               fontWeight: FontWeight.w900),))
                   ],
                 ),
@@ -81,7 +82,7 @@ class _HomePageState extends State<HomePage> {
                         child: Text("УМРА".toLatin(theme.isLatin),
                           style: TextStyle(
                               fontSize: 25,
-                              color: Color(0xFF2C6E4F),
+                            color: theme.isDark?  white :Color(0xFF2C6E4F),
                           fontWeight: FontWeight.bold,),))
                   ],
                 ),

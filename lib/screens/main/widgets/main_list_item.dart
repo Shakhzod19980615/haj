@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:haj/colors/colors.dart';
 import 'package:haj/extentions/extention.dart';
 import 'package:haj/model/demo_model.dart';
 import 'package:haj/screens/context/context_page.dart';
@@ -34,7 +35,7 @@ class MainListItem extends StatelessWidget {
                   margin: EdgeInsets.only(left: 20,top: 10),
                   child: Text("${model.title??""}".toLatin(theme.isLatin),
                     style: TextStyle(
-                        color: Color(0xFF2C6E4F),
+                        color: theme.isDark ? white : Color(0xFF2C6E4F),
                         fontSize:20, fontWeight: FontWeight.w800 ),),
                 ),
               ],
@@ -68,11 +69,11 @@ class MainListItem extends StatelessWidget {
                     margin:EdgeInsets.only(top: 10,left: 0),
                     decoration:BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(18)),
-                      color: Color(0xFFD6F0E3),
+                      color: theme.isDark ? darkColorBk : Color(0xFFD6F0E3),
                     ),
 
                     child: Padding(
-                      padding: const EdgeInsets.all(18.0),
+                      padding: EdgeInsets.all(18.0),
                       child: Row(
                         children: [
                           Align(
@@ -81,7 +82,7 @@ class MainListItem extends StatelessWidget {
                                padding:EdgeInsets.all(10),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.all(Radius.circular(18)),
-                                  color: Color(0xFF429E73)
+                                  color: theme.isDark? darkCard : Color(0xFF429E73)
                                 ),
                                 child: Text("${model.subList?[index].subTitle??""}".toLatin(theme.isLatin),
                                 style: TextStyle(color: Colors.white,fontSize: 16,

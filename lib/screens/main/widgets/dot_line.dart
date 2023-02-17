@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:haj/colors/colors.dart';
+
+import '../../../theme/theming_cubit.dart';
 
 class DotLine extends StatelessWidget {
   const DotLine({Key? key,this.padding,required this.isTop}) : super(key: key);
@@ -8,13 +12,14 @@ class DotLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemingCubit theme = BlocProvider.of<ThemingCubit>(context, listen: false);
     return Container(
       padding: isTop?padding:null,
       child: Stack(
         children: [
 
-          const VerticalDivider(
-            color: Color(0xFF429E73),
+           VerticalDivider(
+            color: theme.isDark? white:  Color(0xFF429E73),
             thickness: 5,
           ),
 
@@ -27,7 +32,7 @@ class DotLine extends StatelessWidget {
                 width: 16,
                 height: 16,
                 decoration: BoxDecoration(
-                    color: Color(0xFF2C6E4F),
+                    color: theme.isDark? white: Color(0xFF2C6E4F),
                     borderRadius: BorderRadius.circular(50)
                 ),
               ),
