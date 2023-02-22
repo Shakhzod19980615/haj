@@ -1,14 +1,15 @@
 
-
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:haj/colors/colors.dart';
 import 'package:haj/extentions/extention.dart';
 
 import '../../../theme/theming_cubit.dart';
+import '../../home_page.dart';
 
 
 
@@ -18,7 +19,13 @@ import '../../../theme/theming_cubit.dart';
 
    bool isNotificationOn = false;
   bool isDark = false;
+   Future<void> share() async {
+     await FlutterShare.share(
+         title: "TITLE",
+         text: "Text");
+   }
   return PopupMenuButton(
+
       //color: theme.isDark? darkerColor : white,
       icon: SvgPicture.asset("assets/images/menu_logo.svg",width: 20,height: 20,),
       itemBuilder: (context) => [
@@ -59,7 +66,9 @@ import '../../../theme/theming_cubit.dart';
                 ),
                 Icon(Icons.notifications_active,color: Color(0xFFC7C7C7),)
               ],
-            )),
+            ),
+        value: 1,),
+
         PopupMenuItem(
             onTap:() {
 
@@ -157,19 +166,26 @@ import '../../../theme/theming_cubit.dart';
 
         ],)
         ),
-        PopupMenuItem(child:
-        Row(children: [
-          Spacer(),
-          Container(
-            margin: EdgeInsets.only(right: 12),
-            child: Text("Улашиш".toLatin(theme.isLatin),
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,color: theme.isDark?white: Color(0xFF2C6E4F)),),
+        PopupMenuItem(
+            onTap: share,
+            child:
+          StatefulBuilder(
+            builder: (context,state) {
+              return Row(
+                children: [
+                  Spacer(),
+                  Container(
+                    margin: EdgeInsets.only(right: 12),
+                    child: Text("Улашиш".toLatin(theme.isLatin),
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: theme.isDark ? white : Color(0xFF2C6E4F)),),
+                  ),
+                  Icon(Icons.share, color: Color(0xFFC7C7C7),),
+                ],);
+            })
           ),
-          Icon(Icons.share,color: Color(0xFFC7C7C7),),
-        ],)
-        ),
         PopupMenuItem(child:
         Row(children: [
           Spacer(),

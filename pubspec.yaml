@@ -39,6 +39,7 @@ dependencies:
   flutter_bloc: ^8.0.1
   provider: ^6.0.3
   translit: ^2.0.0
+  flutter_share: ^2.0.0
   translate:
     git:
       url: https://gitlab+deploy-token-1562522:XtiLAt8YeGpqN7aba353@gitlab.com/hilolnashr/translate.git
