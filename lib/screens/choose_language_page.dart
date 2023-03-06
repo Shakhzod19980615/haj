@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:haj/screens/home_page.dart';
+import 'package:haj/screens/trip_direction_page.dart';
 import 'package:haj/settings/settings_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../theme/theming_cubit.dart';
 
 class ChooseLanguagePage extends StatefulWidget {
-  const ChooseLanguagePage({Key? key}) : super(key: key);
+  ChooseLanguagePage({Key? key}) : super(key: key);
 
   @override
   State<ChooseLanguagePage> createState() => _ChooseLanguagePageState();
@@ -45,8 +46,7 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                            builder: (context) => HomePage(
-
+                            builder: (context) => TripDirectionPage(
                         ),
                         ),);
                       },
@@ -67,8 +67,7 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => HomePage(
-
+                          builder: (context) => TripDirectionPage(
                           ),
                         ),
                       );

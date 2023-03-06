@@ -18,7 +18,7 @@ import '../../home_page.dart';
 
 
    bool isNotificationOn = false;
-  bool isDark = false;
+  ValueNotifier notifier = ValueNotifier(false);
    Future<void> share() async {
      await FlutterShare.share(
          title: "TITLE",
@@ -31,44 +31,53 @@ import '../../home_page.dart';
       itemBuilder: (context) => [
         PopupMenuItem(
             padding: EdgeInsets.zero,
-            child: StatefulBuilder(
-              builder: (context,state){
-              return Row(
-                children: [
-                  Spacer(),
-                  Container(
-                    margin: EdgeInsets.only(right: 20),
-                    child: Text("Созламалар".toLatin(theme.isLatin),
-                      style: TextStyle(
-                          color: theme.isDark? white : Color(0xFF2C6E4F),
-                          fontSize: 20,fontWeight: FontWeight.w700),),
-                  ),
-                  Container(
-                      margin: EdgeInsets.only(right: 20),
-                      child: SvgPicture.asset("assets/images/menu_green_logo.svg",color: theme.isDark?white: Color(0xFF2C6E4F),)),
+            child: ValueListenableBuilder(
+              valueListenable: notifier,
+              builder: (context,s,d) {
+                return StatefulBuilder(
+                  builder: (context,state){
+                  return Row(
+                    children: [
+                      Spacer(),
+                      Container(
+                        margin: EdgeInsets.only(right: 20),
+                        child: Text("Созламалар".toLatin(theme.isLatin),
+                          style: TextStyle(
+                              color: theme.isDark? white : Color(0xFF2C6E4F),
+                              fontSize: 20,fontWeight: FontWeight.w700),),
+                      ),
+                      Container(
+                          margin: EdgeInsets.only(right: 20),
+                          child: SvgPicture.asset("assets/images/menu_green_logo.svg",color: theme.isDark?white: Color(0xFF2C6E4F),)),
 
-                ],
-              );},
+                    ],
+                  );},
+                );
+              }
             )),
         PopupMenuItem(
-            child: Row(
-              children: [
-                Spacer(),
-                Switch(value: isNotificationOn, onChanged: (onChanged){
+            child: ValueListenableBuilder(
+              valueListenable: notifier,
+              builder: (context,_,l) {
+                return Row(
+                  children: [
+                    Spacer(),
+                    Switch(value: isNotificationOn, onChanged: (onChanged){
 
-                }),
-                Container(
-                  margin: EdgeInsets.only(right: 12),
-                  child: Text("Билдириш".toLatin(theme.isLatin),
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,color: theme.isDark?white: Color(0xFF2C6E4F)),),
-                ),
-                Icon(Icons.notifications_active,color: Color(0xFFC7C7C7),)
-              ],
+                    }),
+                    Container(
+                      margin: EdgeInsets.only(right: 12),
+                      child: Text("Билдириш".toLatin(theme.isLatin),
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,color: theme.isDark?white: Color(0xFF2C6E4F)),),
+                    ),
+                    Icon(Icons.notifications_active,color: Color(0xFFC7C7C7),)
+                  ],
+                );
+              }
             ),
         value: 1,),
-
         PopupMenuItem(
             onTap:() {
 
@@ -107,8 +116,9 @@ import '../../home_page.dart';
                   });
             },
 
-            child: StatefulBuilder(
-              builder: (context,state) {
+            child: ValueListenableBuilder(
+              valueListenable: notifier,
+              builder: (context,_,l) {
                 return Row(
                   children: [
 
@@ -129,16 +139,17 @@ import '../../home_page.dart';
         ),
         PopupMenuItem(
 
-            child:  StatefulBuilder(
-              builder: (context,state) {
+
+
+            child:  ValueListenableBuilder(
+              valueListenable: notifier,
+              builder: (context,_,h) {
                 return Row(
                   children: [
                     Spacer(),
                     Switch(value: theme.isDark, onChanged: (bool value) {
                       theme.changeTheme(value);
-                      state.call(
-                          (){}
-                      );
+                      notifier.notifyListeners();
                     },),
                     Container(
                       margin: EdgeInsets.only(right: 12),
@@ -152,25 +163,32 @@ import '../../home_page.dart';
                 );
               }
             )),
-        PopupMenuItem(child:
-        Row(children: [
-          Spacer(),
-          Container(
-            margin: EdgeInsets.only(right: 12),
-            child: Text("Мурожаат".toLatin(theme.isLatin),
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,color: theme.isDark?white: Color(0xFF2C6E4F)),),
+        PopupMenuItem(
+            child:ValueListenableBuilder(
+               valueListenable: notifier,
+              builder: (context,_,l) {
+              return Row(children: [
+                Spacer(),
+                Container(
+                 margin: EdgeInsets.only(right: 12),
+                 child: Text("Мурожаат".toLatin(theme.isLatin),
+                   style: TextStyle(
+                       fontSize: 20,
+                       fontWeight: FontWeight.w500,color: theme.isDark?white: Color(0xFF2C6E4F)),),
           ),
-          Icon(Icons.message,color: Color(0xFFC7C7C7),),
+                  Icon(Icons.message,color: Color(0xFFC7C7C7),),
 
-        ],)
+              ],
+                );
+               }
+            )
         ),
         PopupMenuItem(
             onTap: share,
             child:
-          StatefulBuilder(
-            builder: (context,state) {
+          ValueListenableBuilder(
+            valueListenable: notifier,
+            builder: (context,_,l) {
               return Row(
                 children: [
                   Spacer(),
@@ -187,18 +205,25 @@ import '../../home_page.dart';
             })
           ),
         PopupMenuItem(child:
-        Row(children: [
-          Spacer(),
-          Container(
-            margin: EdgeInsets.only(right: 12),
-            child: Text("Илова ҳақида".toLatin(theme.isLatin),
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,color:theme.isDark?white: Color(0xFF2C6E4F)),),
-          ),
-          SvgPicture.asset("assets/images/about_logo.svg",color: Color(0xFFC7C7C7),),
 
-        ],)
+         ValueListenableBuilder(
+            valueListenable: notifier,
+            builder: (context,_,l) {
+              return Row(children: [
+                Spacer(),
+                Container(
+                  margin: EdgeInsets.only(right: 12),
+                  child: Text("Илова ҳақида".toLatin(theme.isLatin),
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                        color: theme.isDark ? white : Color(0xFF2C6E4F)),),
+                ),
+                SvgPicture.asset(
+                  "assets/images/about_logo.svg", color: Color(0xFFC7C7C7),),
+
+              ],);
+            })
         ),
       ]);
 

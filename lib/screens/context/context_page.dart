@@ -8,6 +8,7 @@ import 'package:haj/screens/main/widgets/pop_up_menu_button.dart';
 
 import '../../model/demo_model.dart';
 import '../../theme/theming_cubit.dart';
+import '../main/widgets/animation.dart';
 import '../main/widgets/main_list_item.dart';
 
 class ContextPage extends StatefulWidget {
@@ -17,10 +18,21 @@ class ContextPage extends StatefulWidget {
   State<ContextPage> createState() => _ContextPageState();
 }
 
-class _ContextPageState extends State<ContextPage> {
-
+class _ContextPageState extends State<ContextPage> with SingleTickerProviderStateMixin {
+  Animation<double>? animation;
+  late AnimationController _controller;
   bool isNotificationOn = false;
   bool isNightModeOn = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _controller =
+    AnimationController(duration: Duration(seconds: 10), vsync: this)
+      ..repeat();
+
+    animation = Tween<double>(begin: -500, end: 0).animate(_controller);
+  }
   @override
   Widget build(BuildContext context) {
     ThemingCubit theme = BlocProvider.of<ThemingCubit>(context, listen: false);
@@ -34,31 +46,36 @@ class _ContextPageState extends State<ContextPage> {
         ],
       ),
       body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        color: theme.isDark? darkColorBk: Color(0xFF2C6E4F),
-        child: Column(
-          children: [
-            ImageContainer(),
-            Expanded(
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  clipBehavior: Clip.antiAlias,
-                  decoration:  BoxDecoration(
-                      color: theme.isDark? darkCard: Color(0xFFD6F0E3),
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(32),
-                          topRight: Radius.circular(32))),
 
-                  child:ListView.builder(
-                    padding: EdgeInsets.only(top: 30),
-                    itemCount: 1,
-                    itemBuilder: (context,index){
-                      return ZikrListItem();
-                }
+        color: theme.isDark? darkColorBk: Color(0xFF2C6E4F),
+        child: Stack(
+          children: [
+            MyClipPath(animation!,(){},true),
+            Column(
+              children: [
+                SizedBox(
+                  height: 125,
                 ),
-              )
+                Expanded(
+                    child: Container(
+
+                      clipBehavior: Clip.antiAlias,
+                      decoration:  BoxDecoration(
+                          color: theme.isDark? darkCard: Color(0xFFD6F0E3),
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(32),
+                              topRight: Radius.circular(32))),
+
+                      child:ListView.builder(
+                        padding: EdgeInsets.only(top: 30),
+                        itemCount: 1,
+                        itemBuilder: (context,index){
+                          return ZikrListItem();
+                    }
+                    ),
+                  )
+                ),
+              ],
             )
           ],
         ),

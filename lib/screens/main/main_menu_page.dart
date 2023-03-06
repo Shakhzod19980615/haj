@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:haj/colors/colors.dart';
 import 'package:haj/constants/themes.dart';
 import 'package:haj/model/demo_model.dart';
+import 'package:haj/screens/main/widgets/animation.dart';
 import 'package:haj/screens/main/widgets/image_container.dart';
 import 'package:haj/screens/main/widgets/main_list_item.dart';
 import 'package:haj/screens/main/widgets/pop_up_menu_button.dart';
@@ -12,21 +13,36 @@ import 'package:haj/screens/main/widgets/pop_up_menu_button.dart';
 import '../../theme/theming_cubit.dart';
 
 class MainMenuPage extends StatefulWidget {
-  const MainMenuPage({Key? key}) : super(key: key);
+
+  MainMenuPage({Key? key}) : super(key: key);
 
   @override
   State<MainMenuPage> createState() => _MainMenuPageState();
+  // void Function() onTap;
+  // bool playing;
 }
 
-class _MainMenuPageState extends State<MainMenuPage> {
+class _MainMenuPageState extends State<MainMenuPage> with SingleTickerProviderStateMixin{
+  Animation<double>? animation;
+  late AnimationController _controller;
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _controller =
+    AnimationController(duration: Duration(seconds: 10), vsync: this)
+      ..repeat();
+
+    animation = Tween<double>(begin: -500, end: 0).animate(_controller);
+  }
   bool isNotificationOn = false;
   bool isNightModeOn = false;
   @override
   Widget build(BuildContext context) {
     ThemingCubit theme = BlocProvider.of<ThemingCubit>(context, listen: false);
     return Scaffold(
-      //backgroundColor: Color(0xFF2C6E4F),
+      //backgroundColor: Color(0xFF1E4A35),
       appBar: AppBar(
         primary: true,
         elevation: 0,
@@ -35,30 +51,36 @@ class _MainMenuPageState extends State<MainMenuPage> {
           textSizePopupMenuButton(BlocProvider.of(context))
         ],
       ),
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
+      body:
+      Container(
         color: theme.isDark? darkColorBk : Color(0xFF2C6E4F),
-        child: Column(
+        child: Stack(
           children: [
-            ImageContainer(),
-            Expanded(
-              child: Container(
-                // height: MediaQuery.of(context).size.height - 90,
-                clipBehavior: Clip.antiAlias,
-                decoration:  BoxDecoration(
-                    color: theme.isDark? darkerColor : Colors.white,
+            MyClipPath(animation!,(){},true),
 
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(32),
-                        topRight: Radius.circular(32))),
-                child: ListView.builder(
-                    padding: EdgeInsets.only(top: 30),
-                    itemCount: demoList.length,
-                    itemBuilder: (context,index){
-                      return MainListItem(model: demoList[index],isTopItem: index ==0,);
-                }),
-              ),
+            Column(
+              children: [
+                SizedBox(
+                  height: 125,
+                ),
+                Expanded(
+                  child: Container(
+                    // height: MediaQuery.of(context).size.height - 90,
+                    clipBehavior: Clip.antiAlias,
+                    decoration:  BoxDecoration(
+                        color: theme.isDark? darkerColor : Colors.white,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(32),
+                            topRight: Radius.circular(32))),
+                    child: ListView.builder(
+                        padding: EdgeInsets.only(top: 30),
+                        itemCount: demoList.length,
+                        itemBuilder: (context,index){
+                          return MainListItem(model: demoList[index],isTopItem: index ==0,);
+                    }),
+                  ),
+                ),
+              ],
             )
           ],
         ),

@@ -5,17 +5,19 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:haj/colors/colors.dart';
 import 'package:haj/extentions/extention.dart';
 import 'package:haj/screens/main/main_menu_page.dart';
+import 'package:haj/screens/trip_direction_page.dart';
 
 import '../theme/theming_cubit.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+
   void initState() {
     ThemingCubit theme = BlocProvider.of<ThemingCubit>(context, listen: false);
     super.initState();
@@ -66,7 +68,6 @@ class _HomePageState extends State<HomePage> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => MainMenuPage(
-
                       ),
                     ),
                   );
