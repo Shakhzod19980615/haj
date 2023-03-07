@@ -5,11 +5,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:haj/colors/colors.dart';
 import 'package:haj/constants/themes.dart';
 import 'package:haj/model/demo_model.dart';
+import 'package:haj/model/umra_model.dart';
 import 'package:haj/screens/main/widgets/animation.dart';
 import 'package:haj/screens/main/widgets/image_container.dart';
 import 'package:haj/screens/main/widgets/main_list_item.dart';
 import 'package:haj/screens/main/widgets/pop_up_menu_button.dart';
 
+import '../../db/database_helper.dart';
 import '../../theme/theming_cubit.dart';
 
 class MainMenuPage extends StatefulWidget {
@@ -23,6 +25,7 @@ class MainMenuPage extends StatefulWidget {
 }
 
 class _MainMenuPageState extends State<MainMenuPage> with SingleTickerProviderStateMixin{
+  final dbhelper = DatabaseHelper.instance;
   Animation<double>? animation;
   late AnimationController _controller;
 
@@ -52,38 +55,51 @@ class _MainMenuPageState extends State<MainMenuPage> with SingleTickerProviderSt
         ],
       ),
       body:
-      Container(
-        color: theme.isDark? darkColorBk : Color(0xFF2C6E4F),
-        child: Stack(
-          children: [
-            MyClipPath(animation!,(){},true),
+      FutureBuilder(
+        future: dbhelper.getUmraMainMenu(),
+        builder: ( context, snapshot) {
+          if (!snapshot.hasData){
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else{
+              var list =snapshot.data as List<UmraModel>;
 
-            Column(
-              children: [
-                SizedBox(
-                  height: 125,
-                ),
-                Expanded(
-                  child: Container(
-                    // height: MediaQuery.of(context).size.height - 90,
-                    clipBehavior: Clip.antiAlias,
-                    decoration:  BoxDecoration(
-                        color: theme.isDark? darkerColor : Colors.white,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(32),
-                            topRight: Radius.circular(32))),
-                    child: ListView.builder(
-                        padding: EdgeInsets.only(top: 30),
-                        itemCount: demoList.length,
-                        itemBuilder: (context,index){
-                          return MainListItem(model: demoList[index],isTopItem: index ==0,);
-                    }),
+        return Container(
+          color: theme.isDark? darkColorBk : Color(0xFF2C6E4F),
+          child: Stack(
+            children: [
+              MyClipPath(animation!,(){},true),
+
+              Column(
+                children: [
+                  SizedBox(
+                    height: 125,
                   ),
-                ),
-              ],
-            )
-          ],
-        ),
+                  Expanded(
+                    child: Container(
+                      // height: MediaQuery.of(context).size.height - 90,
+                      clipBehavior: Clip.antiAlias,
+                      decoration:  BoxDecoration(
+                          color: theme.isDark? darkerColor : Colors.white,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(32),
+                              topRight: Radius.circular(32))),
+                      child: ListView.builder(
+                          padding: EdgeInsets.only(top: 30),
+                          itemCount: list.length,
+                          itemBuilder: (context,index){
+                            return MainListItem(umraModel: list[index],isTopItem: index ==0,);
+                      }),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        );
+        }
+        }
       ),
     );
   }

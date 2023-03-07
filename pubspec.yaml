@@ -79,6 +79,7 @@ flutter:
     - assets/wave-02.svg
     - assets/images/kaba1.svg
     - assets/walk.json
+    - assets/umra.db
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

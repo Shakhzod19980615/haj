@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
-import 'package:sqflite_sqlcipher/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:sqflite/sqflite.dart';
 
 import '../model/umra_model.dart';
 
@@ -18,7 +18,7 @@ class DatabaseHelper {
 
   Future<Database> _initDatabase() async {
     Directory documentDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentDirectory.path, "haj_umra.db");
+    String path = join(documentDirectory.path, "umra.db");
 
 // delete existing if any
     await deleteDatabase(path);
@@ -29,7 +29,7 @@ class DatabaseHelper {
     } catch (_) {}
 
 // Copy from asset
-    ByteData data = await rootBundle.load(join("assets", "haj_umra.db"));
+    ByteData data = await rootBundle.load(join("assets", "umra.db"));
     List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
     await File(path).writeAsBytes(bytes, flush: true);
 
@@ -46,7 +46,7 @@ class DatabaseHelper {
 
   Future<List<UmraModel>> getUmraMainMenu() async {
     Database db = await instance.database;
-    var model = await db.rawQuery('Select * from Menu');
+    var model = await db.rawQuery('Select * from tbl_step');
     List<UmraModel> modelList = model.isNotEmpty
         ? model.map((c) => UmraModel.fromMap(c)).toList()
         : [];
