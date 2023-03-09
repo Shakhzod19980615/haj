@@ -5,16 +5,26 @@ import 'package:haj/extentions/extention.dart';
 import 'package:haj/screens/context/widget/svgPictureButton.dart';
 
 import '../../../colors/colors.dart';
+import '../../../db/database_helper.dart';
+import '../../../model/umra_model.dart';
 import '../../../theme/theming_cubit.dart';
 
 class ZikrListItem extends StatefulWidget {
-  const ZikrListItem({Key? key}) : super(key: key);
+   ZikrListItem({Key? key,
+     required this.title,
+    required this.sublist,
+    required this.isTopItem}) : super(key: key);
 
+  final String title;
+  final List<UmraModel>? sublist;
+  final dbhelper = DatabaseHelper.instance;
+  final bool isTopItem;
   @override
   State<ZikrListItem> createState() => _ZikrListItemState();
 }
 
 class _ZikrListItemState extends State<ZikrListItem> {
+
   @override
   Widget build(BuildContext context) {
     ThemingCubit theme = BlocProvider.of<ThemingCubit>(context, listen: false);
@@ -73,12 +83,7 @@ class _ZikrListItemState extends State<ZikrListItem> {
                                       ),
                                       Container(
                                         margin: const EdgeInsets.symmetric(horizontal: 12,vertical: 12),
-                                        child: Text("«Субҳаналлоҳи валҳамду лиллаҳи вала илаҳа иллаллоҳу"
-                                            " валлоҳу акбар валаа ҳавла валаа қуввата илла биллаҳил ъалиййил азийм."
-                                            " Вассолату вассаламу ала расулиллаҳи соллаллоҳу алайҳи васаллам."
-                                            " Аллоҳумма ийманан бика ва тасдийқон бикитабика вавафаан биъаҳдика"
-                                            " ваттибаъан лисуннати набиййика ва ҳабибика "
-                                            "Муҳаммадин соллаллоҳу алайҳи васаллам",
+                                        child: Text("",
                                         style: TextStyle(
                                             fontSize: 16,
                                             color: theme.isDark? white: Colors.black,

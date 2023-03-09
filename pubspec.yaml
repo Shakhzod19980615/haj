@@ -40,7 +40,9 @@ dependencies:
   provider: ^6.0.3
   translit: ^2.0.0
   flutter_share: ^2.0.0
+  flutter_html: ^2.2.1
   lottie: ^2.2.0
+  collection: ^1.14.13
   translate:
     git:
       url: https://gitlab+deploy-token-1562522:XtiLAt8YeGpqN7aba353@gitlab.com/hilolnashr/translate.git
@@ -80,6 +82,18 @@ flutter:
     - assets/images/kaba1.svg
     - assets/walk.json
     - assets/umra.db
+    - assets/umra_haj.db
+    - assets/images/ehrom.svg
+    - assets/images/labbayka.svg
+    - assets/images/Madina.svg
+    - assets/images/Makkaga.svg
+    - assets/images/nafl_namoz.svg
+    - assets/images/niyat.svg
+    - assets/images/safar-oldi.svg
+    - assets/images/safo_marva.svg
+    - assets/images/soch.svg
+    - assets/images/tavof.svg
+    - assets/images/zam_zam.svg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

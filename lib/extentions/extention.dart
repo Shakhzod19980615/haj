@@ -16,4 +16,8 @@ extension StringExtension on String{
       return this;
     }
   }
+  String replaceTags(){
+    return (this??"").replaceAll("<carabic>", "<p>").replaceAll("</carabic>", "</p>").replaceAll("<narrated>", "<pre>").replaceAll("</narrated>", "</pre>");
+  }
 }
+
