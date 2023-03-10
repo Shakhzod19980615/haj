@@ -5,6 +5,7 @@ import 'package:haj/colors/colors.dart';
 import 'package:haj/extentions/extention.dart';
 import 'package:haj/model/umra_model.dart';
 import 'package:haj/screens/context/context_page.dart';
+import 'package:haj/screens/context/tavof_page.dart';
 import 'package:haj/screens/main/widgets/arrow_line.dart';
 import 'package:haj/screens/main/widgets/dot_line.dart';
 
@@ -75,16 +76,40 @@ class MainListItem extends StatelessWidget {
                       onTap: () {
                         if (sublist?[index].id == 7) {
                           showDialog(context: context, builder: (context)=>AlertDialog(
-                            title: const Text('AlertDialog Title'),
-                            content: const Text('AlertDialog description'),
+                            title: const Text('1 - ТАВОФНИ БОШЛАЙСИЗМИ?',style: TextStyle(
+                              fontSize: 20,color: Color(0xFF1E4A35),fontWeight: FontWeight.w700
+                            ),),
+                            //content: const Text('БОШЛАШ'),
                             actions: <Widget>[
-                              TextButton(
-                                onPressed: () => Navigator.pop(context, 'Cancel'),
-                                child: const Text('Cancel'),
+                              Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(Radius.circular(30)),
+                                    color: theme.isDark? darkCard : Color(0xFFD6F0E3)
+                                ),
+                                child: TextButton(
+                                  onPressed: () => Navigator.pop(context, 'Cancel'),
+                                  child: const Text('БЕКОР ҚИЛИШ',style: TextStyle(
+                                    fontSize: 13, fontWeight: FontWeight.w700,
+                                    color: Color(0xFF1E4A35)
+                                  ),),
+                                ),
                               ),
-                              TextButton(
-                                onPressed: () => Navigator.pop(context, 'OK'),
-                                child: const Text('OK'),
+                              Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(Radius.circular(30)),
+                                    color: theme.isDark? darkCard : Color(0xFFD6F0E3)
+                                ),
+                                child: TextButton(
+                                  onPressed: () => Navigator.push(context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            TavofPage()
+                                    ),),
+                                  child: const Text('БОШЛАШ',style: TextStyle(
+                                      fontSize: 13, fontWeight: FontWeight.w700,
+                                      color: Color(0xFF1E4A35)
+                                  ),),
+                                ),
                               ),
                             ],
 

@@ -6,7 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:haj/colors/colors.dart';
 import 'package:haj/extentions/extention.dart';
 import 'package:haj/screens/context/widget/svgPictureButton.dart';
-import 'package:haj/screens/context/widget/zikr_list_item.dart';
+import 'package:haj/screens/context/widget/tavof_list_item.dart';
 import 'package:haj/screens/main/widgets/image_container.dart';
 import 'package:haj/screens/main/widgets/pop_up_menu_button.dart';
 

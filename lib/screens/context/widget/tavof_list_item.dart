@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_html/style.dart';
 import 'package:haj/extentions/extention.dart';
+import 'package:haj/model/tavof_model.dart';
 import 'package:haj/screens/context/widget/svgPictureButton.dart';
 
 import '../../../colors/colors.dart';
@@ -9,21 +12,20 @@ import '../../../db/database_helper.dart';
 import '../../../model/umra_model.dart';
 import '../../../theme/theming_cubit.dart';
 
-class ZikrListItem extends StatefulWidget {
-   ZikrListItem({Key? key,
-     required this.title,
-    required this.sublist,
-    required this.isTopItem}) : super(key: key);
+class TavofListItem extends StatefulWidget {
+   TavofListItem({Key? key,
+    required this.tavofList, required this.index}) : super(key: key);
 
-  final String title;
-  final List<UmraModel>? sublist;
+  //final String title;
+  final List<TavofModel>? tavofList;
   final dbhelper = DatabaseHelper.instance;
-  final bool isTopItem;
+  final int index;
+  // final bool isTopItem;
   @override
-  State<ZikrListItem> createState() => _ZikrListItemState();
+  State<TavofListItem> createState() => _TavofListItemState();
 }
 
-class _ZikrListItemState extends State<ZikrListItem> {
+class _TavofListItemState extends State<TavofListItem> {
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class _ZikrListItemState extends State<ZikrListItem> {
     return Column(
         children: [
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 17),
+              margin: EdgeInsets.symmetric(horizontal: 17,vertical: 10),
               decoration:  BoxDecoration(
                 color: theme.isDark? darkerColor: Color(0xFF2C6E4F),
                 borderRadius: BorderRadius.all(
@@ -57,7 +59,7 @@ class _ZikrListItemState extends State<ZikrListItem> {
                                       Container(
                                         alignment:Alignment.center,
                                         margin: EdgeInsets.only(top: 20),
-                                        child:  Text("Birinchi shavt duosi",
+                                        child:  Text(widget.tavofList![widget.index].title??"",
                                         style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w700,
@@ -72,18 +74,27 @@ class _ZikrListItemState extends State<ZikrListItem> {
                                         ),
                                         margin: const EdgeInsets.only(left: 14,right: 14,top: 14),
                                         padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                                        child: Text("سُبْحَانَ الهِ وَالْحَمْدُ للهِ وَلَ إِلَهَ إِلَّ الهُ وَ اله أَكْ بَرُ، وَلَ حَوْلَ وَلَ قُوَّةَ"
-                                            " إِلَّ بِاللهِ العَلِ ي العَظِيْمِ وَالصَّ لَ ةُ وَالسَّلَ مُ عَلَى"
-                                            " رَسُولِ اله صَ لَّي اله عَلَيْهِ وَسَلَّمَ، ال لهُمَّ إِيْمَان ا بِكَ وَتَصْدِيْق ا بِكِتَابِكَ وَوَفَا "
-                                            "ء بَعَهْدِكَ وَ ات بَاع ا لِسُنَّةِ ن بِي كَ وَحَبِيْبِكَ مُ حَمَّدٍ صَلَّى الهُ عَلَيْ هِ وَسَلَّمَ. "
-                                            "اللَّهُمَّ إِن ي أَسْ ألَُكَ العَفْ وَ وَ العَافِيَةَ وَ الْمُعَافَاةَ الدَّائ مَةَ فِي ال ديْنِ"
-                                            " وَ الدُّنْيَا وَالآخِرَةَ وَالفَوزَ بِالْجَنَّةِ وَالن جَ اةَ مِ نَ النَّارِ.",
-                                          style: TextStyle(fontSize: 16,color:theme.isDark? white:Colors.black, fontWeight: FontWeight.w700,
-                                              fontStyle: FontStyle.normal),textAlign: TextAlign.right,),
+                                        child: Html(data: widget.tavofList![widget.index].arab?.replaceTags().toLatin(theme.isLatin),
+                                          style: {
+                                            'body': Style(
+
+                                                fontSize: const FontSize(18),
+                                                color: theme.isDark? white: Colors.black,
+                                                fontWeight: FontWeight.w700,textAlign: TextAlign.right),
+                                          },),
+
                                       ),
                                       Container(
+                                      margin: const EdgeInsets.symmetric(horizontal: 12,vertical: 12),
+                                      child: Text(widget.tavofList![widget.index].transcription??"",
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            color: theme.isDark? white: Colors.black,
+                                            fontWeight: FontWeight.w500),),
+                                    ),
+                                      Container(
                                         margin: const EdgeInsets.symmetric(horizontal: 12,vertical: 12),
-                                        child: Text("",
+                                        child: Text(widget.tavofList![widget.index].uzbek??"",
                                         style: TextStyle(
                                             fontSize: 16,
                                             color: theme.isDark? white: Colors.black,
